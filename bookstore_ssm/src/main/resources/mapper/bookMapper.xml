@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nf147_bookstore_ssm.dao.BookDAO">
+
+    <select id="listAll" resultType="com.nf147_bookstore_ssm.entity.Book">
+        select bookid, name, cnt from  t_book
+    </select>
+
+    <select id="getBookAvg" resultType="java.lang.Integer">
+        select avg(cnt) from t_book
+    </select>
+
+    <select id="getBookCount" resultType="java.lang.Integer">
+        select count(*) from t_book
+    </select>
+
+    <select id="getByID" parameterType="int" resultType="com.nf147_bookstore_ssm.entity.Book">
+            select bookid, name, cnt from t_book where bookid = #{bookid}
+    </select>
+
+    <select id="getByName" resultType="com.nf147_bookstore_ssm.entity.Book">
+
+         select * from  t_book where name =#{name}
+
+    </select>
+
+    <delete id="delete" parameterType="com.nf147_bookstore_ssm.entity.Book">
+        delete from t_book where bookid=#{bookid}
+    </delete>
+
+
+    <update id="update" parameterType="com.nf147_bookstore_ssm.entity.Book">
+       update t_book  set  cnt=cnt+1  where name=#{name};
+    </update>
+
+   <!-- <update id="update" parameterType="com.nf147_bookstore_ssm.entity.Book">
+        update t_book set name=#{name},cnt=#{cnt}  where bookid=#{bookid}
+    </update>-->
+
+
+       <insert id="insert" parameterType="com.nf147_bookstore_ssm.entity.Book">
+        insert into t_book (name, cnt) values (#{name},#{cnt})
+    </insert>
+
+
+ <!--   <insert id="insert" parameterType="com.nf147_bookstore_ssm.entity.Book">
+        insert into book_tb (name, Inventory) values (#{name}, #{Inventory})
+    </insert>
+
+    <insert id="update" parameterType="com.nf147_bookstore_ssm.entity.Book">
+        update book_tb
+          set name = #{name}, cnt = #{cnt}
+          where id = #{id}
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from book_tb where id=#{id}
+    </delete>
+
+    <select id="getById" parameterType="int" resultType="com.nf147_bookstore_ssm.entity.Book">
+            select id, name, Inventory from book_tb where id = #{id}
+    </select>
+-->
+<!--    <select id="countAll" resultType="java.lang.Integer">
+        select count(*) from book_tb
+    </select>
+
+    <select id="listAll" resultType="com.nf147_bookstore_ssm.entity.Book">
+        select id, name, Inventory from  book_tb
+    </select>
+
+    <select id="listAllPager" resultType="com.nf147_bookstore_ssm.entity.Book">
+        select id, name, Inventory from book_tb limit #{offset}, #{size}
+    </select>-->
+
+</mapper>
